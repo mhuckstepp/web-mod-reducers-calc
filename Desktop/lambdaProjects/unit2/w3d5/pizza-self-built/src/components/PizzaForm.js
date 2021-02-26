@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import pizzaSchema from "../Validation";
 import * as yup from "yup";
 
+// blank object for form entry
 const formTemp = {
   name: "",
   size: "",
@@ -17,6 +18,7 @@ const formTemp = {
   specInst: "",
 };
 
+// error form template to be populated by Yup responses
 const formErrTemp = {
   name: "",
   size: "",
@@ -32,20 +34,23 @@ const formErrTemp = {
 };
 
 const PizzaForm = ({ submitOrder }) => {
-  const [pizzaForm, setPizzaForm] = useState([formTemp]);
-  const [disabled, setDisabled] = useState(true);
-  const [formErrors, setFormErrors] = useState(formErrTemp);
+  const [pizzaForm, setPizzaForm] = useState([formTemp]); //main form
+  const [disabled, setDisabled] = useState(true); //disables the submit button dependent on yup validation
+  const [formErrors, setFormErrors] = useState(formErrTemp); //Yup top send form errors to this state
 
+  //   onsubmit - handled mostly in App component as 'submitOrder'
   const submitHandler = (evt) => {
     evt.preventDefault();
     submitOrder(pizzaForm);
-    setPizzaForm(formTemp);
+    setPizzaForm(formTemp); //resets form
   };
 
+  //   checks on form with yup
   useEffect(() => {
     pizzaSchema.isValid(pizzaForm).then((valid) => setDisabled(!valid));
   }, [pizzaForm]);
 
+  //   standard form changehandles
   const changeHandler = (evt) => {
     const { name, value, type, checked } = evt.target;
     const realVal = type === "checkbox" ? checked : value;
@@ -77,7 +82,7 @@ const PizzaForm = ({ submitOrder }) => {
           <label>
             Name:
             <input
-              class="border-2 border-gray-500 rounded ml-4 my-8"
+              class="border-2 border-gray-500 rounded ml-4 my-8 focus:ring-2 focus:ring-blue-600"
               type="text"
               name="name"
               value={pizzaForm.name}
@@ -246,7 +251,7 @@ const PizzaForm = ({ submitOrder }) => {
             </label>
           </div>
           <button
-            class="self-center m-auto"
+            class="self-center m-auto hover:bg-blue-700"
             type="submit"
             onSubmit={submitHandler}
             disabled={disabled}

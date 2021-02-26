@@ -8,7 +8,7 @@ const SuccessPage = ({ orderSuccess }) => {
         <h2>
           {" "}
           Hello {orderSuccess.name}, we have received your order for one{" "}
-          {orderSuccess.size} {orderSuccess.sauce} pizza with{" "}
+          {orderSuccess.size} {orderSuccess.sauce} sauce pizza with{" "}
           {orderSuccess.pepp ? "pepporoni," : ""}{" "}
           {orderSuccess.saus ? "Sausage," : ""}{" "}
           {orderSuccess.anchovies ? "Anchovies," : ""}{" "}
@@ -16,10 +16,14 @@ const SuccessPage = ({ orderSuccess }) => {
           {orderSuccess.xtracheese ? "XTRA Cheese," : ""}{" "}
           {orderSuccess.garlic ? "Garlic" : ""}{" "}
         </h2>
+        {/* Only shows if special instructions were entered */}
         <p>
           {orderSuccess.specInst
             ? `We will try to honor your request of - "${orderSuccess.specInst} "`
             : ""}{" "}
+        </p>
+        <p class="mt-16">
+          We should be able to deliver to you in {orderSuccess.id} minutes
         </p>
       </div>
     </div>
