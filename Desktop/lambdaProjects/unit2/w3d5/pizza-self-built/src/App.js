@@ -6,7 +6,9 @@ import SuccessPage from "./components/SuccessPage";
 import { useState } from "react";
 
 const App = () => {
-  const [pizzaForm, setPizzaForm] = useState([]);
+  const submitOrder = (pizzaObj) => {
+    console.log(pizzaObj);
+  };
 
   return (
     <>
@@ -24,7 +26,7 @@ const App = () => {
         <Home />
       </Route>
       <Route path="/pizza">
-        <PizzaForm setPizzaForm={setPizzaForm} pizzaForm={pizzaForm} />
+        <PizzaForm submitOrder={submitOrder} />
       </Route>
       <Route path="/success">
         <SuccessPage />
