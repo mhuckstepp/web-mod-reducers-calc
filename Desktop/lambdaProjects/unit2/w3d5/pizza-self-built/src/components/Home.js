@@ -1,13 +1,15 @@
 import React from "react";
 import RestaurantCard from "./RestaurantCard";
-import { Link } from "react-router";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
     <div class="flex flex-col justify-center align-center">
       <div class="w-full h-96 flex flex-col  justify-center align-center border-2 border-black">
         <h1 class="self-center">Your favorite food, delivered while coding</h1>
-        <button class="w-24 self-center my-8"> Pizza? </button>
+        <Link class="self-center" to="/pizza">
+          <button class="w-24 self-center my-8"> Pizza? </button>
+        </Link>
       </div>
       <div class="w-full flex flex-col justify-center align-center self-center">
         <h2 class="text-2xl m-8"> Food Delivery in Gotham City</h2>
