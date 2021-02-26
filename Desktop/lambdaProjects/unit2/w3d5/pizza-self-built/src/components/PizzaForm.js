@@ -34,7 +34,7 @@ const formErrTemp = {
 const PizzaForm = ({ submitOrder }) => {
   const [pizzaForm, setPizzaForm] = useState([formTemp]);
   const [disabled, setDisabled] = useState(true);
-  const [formErrors, setFormErrors] = useState();
+  const [formErrors, setFormErrors] = useState(formErrTemp);
 
   const submitHandler = (evt) => {
     evt.preventDefault();

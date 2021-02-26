@@ -5,9 +5,11 @@ const pizzaSchema = yup.object().shape({
     .string()
     .trim()
     .required("Please enter your name")
-    .min(6, "Name must be at least 2 characters"),
-  size: yup.mixed().oneOf(["small", "medium", "large"]),
-  sauce: yup.string().required(),
+    .min(3, "Name must be at least 2 characters"),
+  size: yup
+    .mixed()
+    .oneOf(["small", "medium", "large"], "please choose your size"),
+  sauce: yup.string().required("Please choose a sauce"),
   pepp: yup.boolean(),
   saus: yup.boolean(),
   anchovies: yup.boolean(),

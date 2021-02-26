@@ -4,10 +4,36 @@ import Home from "./components/Home";
 import PizzaForm from "./components/PizzaForm";
 import SuccessPage from "./components/SuccessPage";
 import { useState } from "react";
+import Axios from "axios";
+import { Link } from "react-router-dom";
 
 const App = () => {
+  const [orderSuccess, setOrderSuccess] = useState({});
+  const [ordered, setOrdered] = useState(false);
+
   const submitOrder = (pizzaObj) => {
-    console.log(pizzaObj);
+    Axios.post("https://reqres.in/api/users", pizzaObj)
+      .then((res) => {
+        let orderRes = res.data;
+        console.log(orderRes.name);
+        setOrderSuccess({
+          name: orderRes.name.trim(),
+          size: orderRes.size.trim(),
+          sauce: orderRes.sauce.trim(),
+          pepp: orderRes.pepp,
+          saus: orderRes.saus,
+          anchovies: orderRes.anchovies,
+          redpepper: orderRes.redpepper,
+          xtracheese: orderRes.xtracheese,
+          garlic: orderRes.garlic,
+          sub: orderRes.sub,
+          specInst: orderRes.specInst,
+        });
+        setOrdered(true);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   return (
@@ -15,9 +41,11 @@ const App = () => {
       <header class="flex justify-between items-center h-28 bg-gray-300">
         <h3 class="text-2xl text-red-500 mx-8">Lambda Eats</h3>
         <div>
-          <button class="p-2 px-4 bg-gray-700 rounded border-1 border-gray-900">
-            Home
-          </button>
+          <Link to="/">
+            <button class="p-2 px-4 bg-gray-700 rounded border-1 border-gray-900">
+              Home
+            </button>
+          </Link>
           <button class="mr-8 p-2  px-4 bg-gray-400 rounded">Help</button>
         </div>
       </header>
@@ -26,10 +54,11 @@ const App = () => {
         <Home />
       </Route>
       <Route path="/pizza">
-        <PizzaForm submitOrder={submitOrder} />
-      </Route>
-      <Route path="/success">
-        <SuccessPage />
+        {ordered ? (
+          <SuccessPage orderSuccess={orderSuccess} />
+        ) : (
+          <PizzaForm submitOrder={submitOrder} />
+        )}
       </Route>
     </>
   );
