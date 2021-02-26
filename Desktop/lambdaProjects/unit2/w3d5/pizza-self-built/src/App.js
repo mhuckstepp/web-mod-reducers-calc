@@ -3,8 +3,11 @@ import React from "react";
 import Home from "./components/Home";
 import PizzaForm from "./components/PizzaForm";
 import SuccessPage from "./components/SuccessPage";
+import { useState } from "react";
 
 const App = () => {
+  const [pizzaForm, setPizzaForm] = useState([]);
+
   return (
     <>
       <header class="flex justify-between items-center h-28 bg-gray-300">
@@ -17,9 +20,15 @@ const App = () => {
         </div>
       </header>
       <div></div>
-      <Route exact path="/" component={Home} />
-      <Route path="/pizza" component={PizzaForm} />
-      <Route path="/success" component={SuccessPage} />
+      <Route exact path="/">
+        <Home />
+      </Route>
+      <Route path="/pizza">
+        <PizzaForm setPizzaForm={setPizzaForm} pizzaForm={pizzaForm} />
+      </Route>
+      <Route path="/success">
+        <SuccessPage />
+      </Route>
     </>
   );
 };
