@@ -10,10 +10,12 @@ describe("Pizza order app", () => {
   const toppingInp = () => cy.get("input[name=saus]");
   const submitButt = () => cy.get("button[type=submit]");
 
+//   testing cypress is working
   it("We can complete form", () => {
     expect(1 + 1).to.equal(2);
   });
 
+  // test runs from home page to order form and ends on succesful submit page
   it("check inputs are working", () => {
     mainButt().click();
     nameInp().type("Johhn Big Boy");
@@ -24,9 +26,3 @@ describe("Pizza order app", () => {
     submitButt().click();
   });
 });
-
-//   passInp().should("have.value", "MyPass");
-//   tosBox().click();
-//   dropD().select("1");
-//   cheese().click();
-//
